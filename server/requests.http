@@ -40,3 +40,95 @@ Content-Type: application/json
 
 ### Delete event 4
 DELETE http://localhost:3000/api/events/4
+
+### Delete event 4
+DELETE http://localhost:3000/api/events/999
+
+### Stats
+GET http://localhost:3000/api/stats
+
+### Delete event 1 (for the empty test)
+DELETE http://localhost:3000/api/events/1
+
+### Delete event 2 (for the empty test)
+DELETE http://localhost:3000/api/events/2
+
+### Delete event 3 (for the empty test)
+DELETE http://localhost:3000/api/events/3
+
+### Stats with no events
+GET http://localhost:3000/api/stats
+
+### Date in the past -> 400
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "title": "Old event",
+  "date": "2025-05-01T10:00",
+  "location": "Room 1",
+  "capacity": 10
+}
+
+### Title longer than 120 characters -> 400
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "title": "This title is far too long for an event. It just keeps going and going because I want to check that the server rejects any title that has more than one hundred and twenty characters, so it has to fail",
+  "date": "2026-12-10T10:00",
+  "location": "Room 1",
+  "capacity": 10
+}
+
+### Location longer than 100 characters -> 400
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "title": "Long location",
+  "date": "2026-12-10T10:00",
+  "location": "Building A, second floor, the small room at the end of the long corridor, right next to the vending machine",
+  "capacity": 10
+}
+
+### Description longer than 1000 characters -> 400
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "title": "Long description",
+  "date": "2026-12-10T10:00",
+  "location": "Room 1",
+  "description": "This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long. This description is much too long.",
+  "capacity": 10
+}
+
+### Two rules broken at once (200-character title + past date) -> 400
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "title": "This title is far too long for an event. It just keeps going and going because I want to check that the server rejects any title that has more than one hundred and twenty characters, so it has to fail",
+  "date": "2025-05-01T10:00",
+  "location": "Room 1",
+  "capacity": 10
+}
+
+### From a date
+GET http://localhost:3000/api/events?from=2026-11-01
+
+### From a date (same day counts)
+GET http://localhost:3000/api/events?from=2026-10-22
+
+### Sort by title
+GET http://localhost:3000/api/events?sort=title
+
+### Search + sort
+GET http://localhost:3000/api/events?q=night&sort=title
+
+### q, from and sort together
+GET http://localhost:3000/api/events?q=a&from=2026-10-20&sort=title
+
+### Invalid from -> 400
+GET http://localhost:3000/api/events?from=yesterday
