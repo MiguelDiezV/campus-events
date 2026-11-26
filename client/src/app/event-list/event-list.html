@@ -1,0 +1,49 @@
+<div class="toolbar">
+  <input
+    type="search"
+    placeholder="Search events…"
+    [value]="search()"
+    (input)="search.set($any($event.target).value)"
+  />
+  <label>
+    Sort:
+    <select [value]="sortBy()" (change)="sortBy.set($any($event.target).value)">
+      <option value="date">By date</option>
+      <option value="title">By title</option>
+    </select>
+  </label>
+</div>
+
+<app-event-summary [events]="visibleEvents()" [now]="now()" />
+
+<p class="count">{{ visibleEvents().length }} of {{ events().length }} events</p>
+
+<p class="note">
+  ★ {{ favourites().length }} {{ favourites().length === 1 ? 'favourite' : 'favourites' }}
+</p>
+
+<h2>Upcoming</h2>
+<div class="grid">
+  @for (event of upcomingEvents(); track event.id) {
+    <app-event-card
+      [event]="event"
+      [favourite]="isFavourite(event.id)"
+      (favouriteToggle)="toggleFavourite($event)"
+    />
+  } @empty {
+    <p>No upcoming events match your search.</p>
+  }
+</div>
+
+@if (pastEvents().length > 0) {
+  <h2>Past</h2>
+  <div class="grid past">
+    @for (event of pastEvents(); track event.id) {
+      <app-event-card
+        [event]="event"
+        [favourite]="isFavourite(event.id)"
+        (favouriteToggle)="toggleFavourite($event)"
+      />
+    }
+  </div>
+}

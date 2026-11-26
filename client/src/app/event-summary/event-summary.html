@@ -1,0 +1,14 @@
+<section class="summary">
+  <div>
+    <span class="value">{{ count() }}</span>
+    <span class="label">events</span>
+  </div>
+  <div>
+    <span class="value">{{ totalCapacity() }}</span>
+    <span class="label">places in total</span>
+  </div>
+  <div>
+    <span class="value">{{ nextEvent()?.title ?? 'No upcoming event' }}</span>
+    <span class="label">next event</span>
+  </div>
+</section>

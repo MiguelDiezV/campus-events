@@ -1,0 +1,35 @@
+input {
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+}
+.count {
+  color: #666;
+}
+.note {
+  padding: 0.5rem 0.75rem;
+  background: #edf2f9;
+}
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}
+.past {
+  opacity: 0.7;
+}
+h2 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.25rem;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+select {
+  padding: 0.5rem;
+  font: inherit;
+}
