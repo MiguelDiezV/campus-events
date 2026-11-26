@@ -1,0 +1,23 @@
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.summary div {
+  flex: 1 1 10rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #ddd;
+}
+.value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0a4a96;
+}
+.label {
+  color: #666;
+  font-size: 0.875rem;
+}
